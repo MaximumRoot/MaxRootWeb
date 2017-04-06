@@ -1,0 +1,36 @@
+---
+layout: default
+title: MyFirstHomepage
+var1: value1
+---
+
+사라리
+
+<<% main %>>
+
+# 제목
+
+일반문단
+{{{ include: warring }}}
+입니다 개행  
+할래요
+
+> 인용
+문안에서 개행  
+은 이렇다
+
+/** python **/
+파이썬 코드일걸?
+/** end **/
+
+
+/** html **/
+<span>김치맨</span>
+/** end **/
+
+<<% end %>>
+
+
+<<% footer %>>
+다리
+<<% end %>>
