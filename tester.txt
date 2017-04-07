@@ -15,14 +15,31 @@ var1: value1
 입니다 개행  
 할래요
 
+#### 제목4
+
 > 인용
 문안에서 개행  
-은 이렇다
+> 은 이렇다
+{: color:red }
 
 /** python **/
 파이썬 코드일걸?
 /** end **/
 
+1. test
+2. test2
+3. tester
+{: .phone color:blue }
+
+* a
+	* c
+* b
+
+* kimchi
+* power
+over
+man
+{: .mylist #man }
 
 /** html **/
 <span>김치맨</span>
@@ -30,7 +47,33 @@ var1: value1
 
 <<% end %>>
 
-
 <<% footer %>>
-다리
+
+## 왜 소프트웨어 공학이 필요한가
+
+1. 이제 세상은 소프트웨어에 의해 돌아간다.
+2. 소프트웨어를 요구하는 사항은 복잡해지고 다양해지고 있다.
+3. 복잡한 소프트웨어 개발과정을 설계, 감독, 관리할 필요가 생겼다.
+
+*소프트웨어를 그냥 개발할 것이 아니라, 좀 체계적으로 개발해야 할 필요가 있다!*
+
+## Software engineering의 정의
+
+> Software engineering is an **engineering discipline** that is
+concerned with **all aspects of software production** from the early
+stages of system specification through to maintaining the
+system after it has gone into use.
+
+> 소프트웨어 공학은 소프트웨어 제품의 모든 측면과 관련된 공학 규율이다.
+> 시스템 명세화와 같은 초기 단계부터 시스템이 사용자에게 넘어간 뒤의 
+> 유지보수 까지에 관련된 공학 규율(지켜야할 사항)이다.
+
+- engineering discipline
+	- 적절한 이론과 방법을 이용해 문제를 해결하는 것
+	- organizaion(조직의 특성)과 재정적 제약을 염두해야 한다.
+- All aspects of software production
+	- 개발에 필요한 기술적 절차 뿐만 아니라
+	- 프로젝트 관리, 개발 theory, tool, method 등을 포함한다.
+		* real
+
 <<% end %>>

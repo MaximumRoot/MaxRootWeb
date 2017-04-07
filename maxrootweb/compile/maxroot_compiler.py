@@ -1,10 +1,13 @@
 # Encode: UTF-8
 import re
+from maxrootweb.compile import markdown
 
 # header variable process function
 headerProc = {'layout':None}
 
 def compile(filepath) :
+    
+    global headerProc
 
     lineList = []
     cblockDic = dict()
@@ -56,7 +59,7 @@ def compile(filepath) :
 
     fin.close()
         
-    # cblock 
+    # cblock identify
     cb = re.compile("\<\<\% [a-z|A-Z]* \%\>\>")
     for line in lineList:
         
@@ -64,19 +67,64 @@ def compile(filepath) :
         m = cb.match(line)
         if m is not None:
             cblockName = m.group().replace("<<% ", "").replace(" %>>", "")
-            if cblockName.__eq__('end'):
+            if cblockName == 'end':
                 cblockName = 'default'
             if cblockName not in cblockDic:
                 cblockDic[cblockName] = list()
             continue
             
         cblockDic[cblockName].append(line)
-        
-    # each cblock
-    for cname, clist in cblockDic.items():
-        print(cname, clist)
-    
 
+    print(cblockDic.keys())
+    
+    # compile each cblock
+    for cname, clist in cblockDic.items():
+        print('compile', cname, 'content block...')
+        cblockDic[cname] = compile_cblock(clist)
+        print('Done!')
+
+
+    for cname, clist in cblockDic.items():
+        print('<<', cname, '>>')
+        
+        for l in clist:
+            for i in l:
+                print(i)
+            
+        print('')
 
     return
 
+def compile_cblock(lineList):
+    
+    compiled_list = list()
+    textlist = list();
+    
+    # compile type
+    type = 'markdown'
+    textlist.append([type, list()])
+
+    tt = re.compile("\/\*\* [a-z|A-Z]* \*\*\/\n")
+    for line in lineList:
+        
+        # type identifier
+        m = tt.match(line)
+        if m is not None:
+            type = m.group().replace('/** ', '').replace(' **/', '').strip()
+            if type == 'end':
+                type = 'markdown'
+
+            textlist.append([type, list()])
+            continue
+            
+        textlist[-1][-1].append(line)
+                
+    for tblock in textlist:
+        
+        type = tblock[0]
+        text = tblock[1]
+        
+        if type == 'markdown':
+            compiled_list.append(markdown.compiler(text))
+    
+    return compiled_list
