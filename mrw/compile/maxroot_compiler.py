@@ -1,6 +1,6 @@
 # Encode: UTF-8
 import re
-from maxrootweb.compile import markdown
+from mrw.compile import markdown
 
 # header variable process function
 headerProc = {'layout':None}

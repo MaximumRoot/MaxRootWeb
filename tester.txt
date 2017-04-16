@@ -69,11 +69,117 @@ system after it has gone into use.
 > 유지보수 까지에 관련된 공학 규율(지켜야할 사항)이다.
 
 - engineering discipline
-	- 적절한 이론과 방법을 이용해 문제를 해결하는 것
-	- organizaion(조직의 특성)과 재정적 제약을 염두해야 한다.
+  - 적절한 이론과 방법을 이용해 문제를 해결하는 것
+  - organizaion(조직의 특성)과 재정적 제약을 염두해야 한다.
 - All aspects of software production
-	- 개발에 필요한 기술적 절차 뿐만 아니라
-	- 프로젝트 관리, 개발 theory, tool, method 등을 포함한다.
-		* real
+  - 개발에 필요한 기술적 절차 뿐만 아니라
+  - 프로젝트 관리, 개발 theory, tool, method 등을 포함한다.
+
+
+## Software process activities
+
+- **Specification**(명세화)
+  - 프로그램 의 요구사항과 제약사항 requirements and constraints 을 상세화한다.
+- **Development**(개발)
+  - 디자인과 프로그래밍을 말한다.
+- **Validation**(확인)
+  - 소프트웨어가 클라이언트의 요구사항을 충족하는지 확인한다.
+- **Evolution**(변경, 개선)
+  - 시스템을 알맞게 변경하고 개선한다.
+
+## Software fundamental principles
+
+managed and understood : 개발 과정은 충분한 이해와 철저한 관리 하에 이루어 져야 한다.  
+Dependability and perfomance : 확실성과 성능은 어떤 소프트웨어 타입에서도 중요하다.  
+reuse : 적절하게 소프트웨어를 재사용 해야 한다.
+
+## General issues that affect most software
+
+Heterogeneity(이종성) : 운영체제도 다르고, 네트워크도 다르고...  
+Business and social change(환경의 변화) : 시장의 변화, 요구사항의 변화 등등  
+Security and trust(보안과 신뢰성) : 보안문제와 소프트웨어의 신뢰 문제
+
+## Application types
+
+소프트웨어의 타입은 매우 다양하고, 
+*어떤 타입의 소프트웨어에도 적용할 수 있는 소프트웨어 테크닉은 존재하지 않는다*. 
+따라서 소프트웨어의 여러 타입의 성질에 대해 알아야 하며 소프트웨어의 타입에 맞는 소프트웨어 테크닉을 알아야 한다.
+
+- Stand-alone applications
+  - 로컬 PC에서 돌아가고 네트워크나 다른 소프트웨어에 종속되지 않은 애플리케이션
+  - ex)) 워드프로세서, 포토샵  
+
+
+- Interactive transaction-based applications
+	- UI나 터미널 등으로 사용자와의 상호작용을 집중적으로 사용하는 애플리케이션
+	- ex)) web 앱, 인터넷 쇼핑몰
+
+- Embedded control systems
+	- 하드웨어를 관리하고 동작하는 소프트웨어.
+	- ex)) 세탁기, 전자레인지에 설치되어 있는 제어 프로그램
+
+- Batch processing systems
+	- 매우 많은 양의 데이터를 관리하고 처리하는 애플리케이션.
+	- ex)) 도서관리 프로그램, 데이터베이스
+
+- Entertainment systems
+	- 사용자를 즐겁게 하는 것을 목적으로 하는 애플리케이션
+	- ex)) 게임, 동영상 플레이어
+
+- Systems for modelling and simulation
+	- 과학자나 공학자들이 모델링과 시뮬레이션을 위해 사용하는 애플리케이션
+	- ex)) SUMO, Matlab
+
+- Data collection systems
+	- 주어진 환경에서 센서등을 이용해 데이터를 수집하는 애플리케이션
+	- ex)) 기상관측 컴퓨터, 교통상황 관측기
+
+- Systems of systems
+	-  여러 소프트웨어 시스템으로 이루어진 시스템
+	- ex)) 운영체제, 출판 시스템
+
+---
+
+## software costs
+
+소프트웨어의 특성 또는 개발 방법에 따라 소프트웨어 관련 비용이 달라지게 된다.
+Waterfall Model로 개발하는 경우와 Iterative development 방법으로 개발하는
+경우의 비용의 분포가 다르다. 소프트웨어의 수명이 긴 경우에는 development 비용보다 maintenance 비용이 더 크다.
+
+소프트웨어공학의 목적에는 cost-effective 도 포함된다.
+
+## software product
+
+소프트웨어 product는 다음 두 가지로 나눌 수 있다.
+
+- Generic product 
+	- 시장에서 불특정 소비자에게 판매되는 Stand-alone 소프트웨어
+	- 개발자가 시장을 보고 어떤 소프트웨어를 만들 지 명세화한다
+	- ex)) 포토샵, CAD, 워드프로세서, 게임
+- Customized product 
+	- 특정한 소비자의 요구사항에 맞춰 개발된 소프트웨어
+	- 소비자가 자신의 요구사항을 명세화한다
+	- ex)) 임베디드 컨트롤 시스템, 항공관제 소프트웨어, 정부 과제
+
+---
+
+## Essential attributes of good software
+
+- Maintainability(유지보수 용이성)
+	- 소프트웨어는 소비자의 요구사항 변화를 수용할 수 있게 만들어져야 한다.
+	- 비스니스 환경의 변화는 피할 수 없기 때문에 매우 중요한 특성이다.
+- Dependability(확실성) and security
+	- dependability는 reliability(신뢰성), security and safety을 말한다.
+	- 소프트웨어가 잘못되더라고 물리적인 피해나 경제적인 피해가 발생하면 안된다.
+	- 악의적인(malicious) 사용자가 시스템에 피해를 주지 못해야 한다.
+- Efficiency(효율성)
+	- 소프트웨어는 메모리나 프로세스 cycle과 같은 자원을 낭비하지 말아야 한다.
+	- responsiveness(반응성), processing time(실행 시간), memory utilization(메모리 효율), 등을 포함한다.
+- Acceptability(수용 용이성)
+	- 소프트웨어는 사용자가 받아들이고 사용할 수 있어야 한다.
+	- understandable(이해가능), usable(사용성) and compatible(호환가능) 해야 한다.
+
+--- 
+
 
 <<% end %>>
