@@ -1,13 +1,16 @@
 # Encode: UTF-8
 import re
 from mrw.compile import markdown
+from mrw.compile import preprocessor
+from mrw.compile import layoutprocessor
 
 # header variable process function
-headerProc = {'layout':None}
+headerProcfront = {}
+headerProcback = {'layout':layoutprocessor.fillayout}
 
 def compile(filepath) :
     
-    global headerProc
+    global headerProcfront
 
     lineList = []
     cblockDic = dict()
@@ -36,10 +39,10 @@ def compile(filepath) :
 
     print(headerDic)
 
-    # Process Header variables
+    # Process Header variables - front
     for variables in headerDic.keys():
         try:
-            procFunc = headerProc[variables]
+            procFunc = headerProcfront[variables]
         except KeyError:
             continue
         if procFunc is not None:
@@ -53,10 +56,12 @@ def compile(filepath) :
 
         # pre-processing
         if line.startswith('{{{'):
-            line = '[[macro]]'
-
-        lineList.append(line)
-
+            line = preprocessor.pre_process(lineList, line)
+            if line != '':
+                lineList.append(line)
+            
+        else:
+            lineList.append(line)
     fin.close()
         
     # cblock identify
@@ -79,21 +84,25 @@ def compile(filepath) :
     
     # compile each cblock
     for cname, clist in cblockDic.items():
-        print('compile', cname, 'content block...')
+        # print('compile', cname, 'content block...')
         cblockDic[cname] = compile_cblock(clist)
-        print('Done!')
+        # print('Done!')
 
+    # Process Header variables - back(layout)
+    filled_list = layoutprocessor.fillayout(headerDic['layout'], cblockDic)
+    # for l in filled_list:
+    #     print(l)
 
-    for cname, clist in cblockDic.items():
-        print('<<', cname, '>>')
-        
-        for l in clist:
-            for i in l:
-                print(i)
-            
-        print('')
+    # for cname, clist in cblockDic.items():
+    #     print('<<', cname, '>>')
+    #     
+    #     for l in clist:
+    #         for i in l:
+    #             print(i)
+    #         
+    #     print('')
 
-    return
+    return [filepath, filled_list]
 
 def compile_cblock(lineList):
     
@@ -104,7 +113,7 @@ def compile_cblock(lineList):
     type = 'markdown'
     textlist.append([type, list()])
 
-    tt = re.compile("\/\*\* [a-z|A-Z]* \*\*\/\n")
+    tt = re.compile("\/\*\* [a-z|A-Z]* \*\*\/")
     for line in lineList:
         
         # type identifier
@@ -126,5 +135,8 @@ def compile_cblock(lineList):
         
         if type == 'markdown':
             compiled_list.append(markdown.compiler(text))
+            
+        elif type == 'html':
+            compiled_list.append(text)
     
     return compiled_list
